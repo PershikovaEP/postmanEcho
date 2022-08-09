@@ -42,8 +42,25 @@ public class PostmanEchoTest {
                 .then()
                 .statusCode(200)
                 .body("data", equalTo("привет"))
+        ;
+    }
 
-
+    @Test
+    void shouldGetRequest() {
+        // Given - When - Then
+// Предусловия
+        given()
+                .baseUri("https://postman-echo.com")
+// Выполняемые действия
+                .when()
+                .get("/get?foo1=bar1&foo2=bar2")
+// Проверки
+                .then()
+//                .statusCode(200)
+                .body("args.foo1", equalTo("bar1"))
+                .body("args.foo2", equalTo("bar2"))
+                .header("Connection", equalTo("keep-alive"))
+                .contentType("application/json; charset=utf-8")
         ;
     }
 
